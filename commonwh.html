@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASAWEBHACKING</title>
+</head>
+<body>
+    <form id="login-form">
+        <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+        <input type="submit" value="Submit" id="login-form-submit">
+    </form>
+    <script>
+    var setCookie = function(name, value, exp) {      
+    var date = new Date();      
+    date.setTime(date.getTime() + exp*24*60*60*1000);      
+    document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+    };
+    let maked_pw = "https://sasagalleryu.netlify.app/layout"
+    setCookie("sitepw", maked_pw, 1);
+        var getCookie = function(name) {      
+        var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');      
+        return value? value[2] : null;  
+    };
+    let site_pw = getCookie("sitepw");
+    const loginForm = document.getElementById("login-form");
+    const loginButton = document.getElementById("login-form-submit");
+
+    loginButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        const pw = loginForm.password.value;
+        if (pw === site_pw) {
+            alert("무엇을 입력하셨나요? 항상 userid를 기억하세요!");
+            location.reload();
+        }else{
+            alert("비밀번호가 틀렸습니다.");
+        }
+    });
+    </script>
+</body>
+</html>
